@@ -23,11 +23,47 @@
     [self doWithCattleId:self colorParam:@"haha"];
 }
 
-- (void) functonPoints
+- (void) functonPointers
 {
     setSkinColorFunc
     = (void (*) (id,SET,NSString*)) [cattle[1] methodForSelector:skin];
-    sayFunc
+    sayFunc = [cattle[1] methodForSelector:say];
+    setSkinColorFunc(cattle[1],skin,@"verbose");
+    NSLog(@"Running as a function pointer will be more efficiency!");
+    asyFunc(cattle[1],say);
+}
+
+- (void) doWithCattleId:(id) aCattle colorParam:(NSString *) color
+{
+    if(notFirstRun == NO)
+    {
+    NSString *myName = NSStringFromSellector(_cmd);
+        NSLog(@"Running in the method of %@",myName);
+        notForstRun = YES;
+    }
+
+    NSString *cattleParamClassName = [aCattle className];
+    if([cattleParamClassName isEqualToString:BULL_CLASS] ||
+       [cattleParamClassName isEqualToString:CATTLE_CLASS])
+    {
+            [aCattle setLegsCount:4];
+            if([aCattle respondsToSelector:skin])
+            {
+                    [aCattle perFormSelector:skin withObject:color];
+            }
+            else
+            {
+                    NSLog(@"Hi,I am a %@,have not setSkinColor!",
+                                    cattleParamClassName);
+            }
+            [aCattle performSelector:say];
+    }
+    else
+    {
+            NSString *yourClassName = [aCattle className];
+            NSLog(@"Hi, you are a %@, but I like cattle or bull!",
+                            yourClassName);
+    }
 }
 
 

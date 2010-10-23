@@ -3,8 +3,9 @@ FLAGS = -I/usr/pkg/include -fconstant-string-class=NSConstantString \
 
 all:helloworld
 
-helloworld:helloworld.m Callte.m Bull.m
-	gcc $(FLAGS) -o helloworld helloworld.m Callte.m Bull.m -Wall
+helloworld:helloworld.m Callte.m Bull.m DoProxy.m
+	gcc $(FLAGS) -o helloworld helloworld.m Callte.m Bull.m \
+		DoProxy.m -Wall
 
 clean:
 	rm -f helloworld
